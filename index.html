@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5b4bdb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="app_icon.ico">
+  <link rel="stylesheet" href="style.css">
+  <title>Roue des élèves</title>
+</head>
+<body>
+  <header><div><h1>Roue des élèves</h1><p>Gérez vos classes et effectuez vos tirages au sort.</p></div><button id="installButton" class="secondary" hidden>Installer l’application</button></header>
+  <main>
+    <nav role="tablist"><button class="tab active" data-tab="classes">Classes & élèves</button><button class="tab" data-tab="draw">Roue du tirage</button></nav>
+    <section id="classes" class="panel active">
+      <div class="card"><h2>Classes</h2><ul id="classList" class="list"></ul><form id="classForm"><input id="className" required placeholder="Nom de la classe"><button>Créer la classe</button></form><button id="deleteClass" class="danger">Supprimer la classe sélectionnée</button></div>
+      <div class="card students"><h2 id="studentsTitle">Élèves de la classe</h2><ul id="studentList" class="list"></ul><form id="studentForm"><input id="firstName" required placeholder="Prénom"><input id="lastName" required placeholder="Nom"><button>Ajouter</button></form><div class="actions"><button id="deleteStudent" class="danger">Retirer l’élève sélectionné</button><label class="fileButton">Importer un fichier Excel <input id="excelFile" type="file" accept=".xlsx,.xls" hidden></label></div><p class="hint">L’import accepte les colonnes : Nom, Date de naissance, Sexe, Âge, Régime et Classe.</p></div>
+    </section>
+    <section id="draw" class="panel">
+      <div class="drawLayout"><div class="card"><h2>Classes à inclure</h2><div id="drawClasses" class="checklist"></div></div><div class="card controls"><h2>Tirage</h2><label>Nombre d’élèves tirés <input id="drawCount" type="number" min="1" value="1"></label><label class="checkbox"><input id="excludeHistory" type="checkbox"> Exclure les élèves déjà tirés</label><button id="drawButton">Lancer le tirage</button><button id="resetButton" class="secondary">Réinitialiser</button></div><div class="card"><h2>Résultats</h2><ul id="results" class="list"></ul></div><div class="card"><h2>Historique</h2><ul id="history" class="list history"></ul><button id="clearHistory" class="danger">Vider l’historique</button></div></div>
+      <div class="wheelCard"><canvas id="wheel" width="800" height="800" aria-label="Roue de tirage"></canvas><p id="wheelMessage">Sélectionnez au moins une classe.</p></div>
+    </section>
+  </main>
+  <dialog id="message"><p id="messageText"></p><button id="closeMessage">Fermer</button></dialog>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
